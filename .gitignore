@@ -32,5 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-### 配置文件
-*.properties
+### 配置文件 ###
+application.properties
