@@ -73,7 +73,7 @@ public class AlphaController {
     //POST请求
     @RequestMapping(path = "/student", method = RequestMethod.POST)
     @ResponseBody
-    public String saveStudent(String name, int age) { //如何传参：参数名字与表单中数据的名字一致
+    public String saveStudent(String name, int age) { //如何传参：参数名与表单中数据的name一致
         System.out.println(name);
         System.out.println(age);
         return "success";

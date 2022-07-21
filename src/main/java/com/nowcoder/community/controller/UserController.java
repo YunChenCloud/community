@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -48,6 +49,12 @@ public class UserController {
         return "/site/setting";
     }
 
+    /**
+     * 上传新头像
+     * @param headerImage
+     * @param model
+     * @return
+     */
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
     public String uploadHeader(MultipartFile headerImage, Model model) {
         if (headerImage == null) {
@@ -84,7 +91,7 @@ public class UserController {
     }
 
     /**
-     * 获取头像
+     * 读取头像
      * @param fileName
      * @param response
      * 返回的是图片，需要通过流放在response中，手动向浏览器输出，所以返回值是void
@@ -110,6 +117,21 @@ public class UserController {
         } catch (IOException e) {
             logger.error("读取头像失败：" + e.getMessage());
         }
+    }
+
+    @RequestMapping(path = "/password", method = RequestMethod.POST)
+    public String updatePassword(Model model, String oldPassword, String newPassword) {
+        User user = hostHolder.getUser();
+        //更新当前用户的密码
+        Map<String, Object> map = userService.updatePassword(user.getId(), oldPassword, newPassword);
+
+        if (map != null && !map.isEmpty()) {
+            model.addAttribute("oldPasswordMsg", map.get("oldPasswordMsg"));
+            model.addAttribute("newPasswordMsg", map.get("newPasswordMsg"));
+            return "/site/setting";
+        }
+
+        return "redirect:/index";
     }
 
 }
