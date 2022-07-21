@@ -89,6 +89,7 @@ public class UserController {
      * @param response
      * 返回的是图片，需要通过流放在response中，手动向浏览器输出，所以返回值是void
      */
+    //这里的path是根据uploadHeader()方法里的头像的web访问路径决定的
     @RequestMapping(path = "/header/{fileName}", method = RequestMethod.GET)
     public void getHeader(@PathVariable("fileName") String fileName, HttpServletResponse response) {
         //服务器存放路径
