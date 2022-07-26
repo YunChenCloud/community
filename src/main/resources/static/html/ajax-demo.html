@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+</head>
+<body>
+    <p>
+        <input type="button" value="发送" onclick="send();">
+    </p>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script>
+        function send() {
+            //三个参数：访问路径，要向服务器提交的数据，匿名的回调函数
+            $.post( //也可以用通用的 $.ajax()
+                "/community/alpha/ajax", //在AlphaController中
+                {"name":"张三","age":"23"},
+                function (data) { //data：String 服务器返回给浏览器的数据
+                    console.log(typeof(data)); //string
+                    console.log(data); //{"msg":"操作成功！","code":0}
+
+                    data = $.parseJSON(data); //data转化为json对象
+                    console.log(typeof(data)); //object
+                    console.log(data.code); //0
+                    console.log(data.msg); //操作成功！
+                }
+            );
+        }
+    </script>
+</body>
+</html>
