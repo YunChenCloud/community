@@ -14,6 +14,7 @@
     </sql>
     
     <!--resultType 返回类型-->
+    <!--select语句需要声明返回值类型-->
     <select id="selectById" resultType="User">
         select <include refid="selectFields"></include>
         from user
