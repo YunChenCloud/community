@@ -16,7 +16,7 @@
             $.post( //也可以用通用的 $.ajax()
                 "/community/alpha/ajax", //在AlphaController中
                 {"name":"张三","age":"23"},
-                function (data) { //data：String 服务器返回给浏览器的数据
+                function (data) { //data：String类型 服务器返回给浏览器的数据
                     console.log(typeof(data)); //string
                     console.log(data); //{"msg":"操作成功！","code":0}
 
