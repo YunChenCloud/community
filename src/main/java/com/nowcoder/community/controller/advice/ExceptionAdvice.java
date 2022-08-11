@@ -27,7 +27,7 @@ public class ExceptionAdvice {
 
         //通过request来判断是同步请求还是异步请求
         String xRequestedWith = request.getHeader("x-requested-with");
-        if ("XMLHttpRequest".equals(xRequestedWith)) { //异步请求
+        if (xRequestedWith != null && "XMLHttpRequest".equals(xRequestedWith)) { //异步请求
             response.setContentType("application/plain;charset=utf-8"); //plain表示向浏览器返回的是一个普通字符串 json表示返回的是一个json对象，可以直接解析
             PrintWriter writer = response.getWriter();
             writer.write(CommunityUtil.getJSONString(1, "服务器异常！"));

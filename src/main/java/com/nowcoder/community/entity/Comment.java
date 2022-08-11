@@ -6,7 +6,7 @@ public class Comment {
 
     private int id;
     private int userId;
-    private int entityType; //评论目标的类别
+    private int entityType; //评论目标的类别 1-帖子 2-评论
     private int entityId; //评论目标
     private int targetId; //回复目标的用户id
     private String content;
