@@ -43,7 +43,7 @@
 									<img th:src="${loginUser.headerUrl}" class="rounded-circle" style="width:30px;"/>
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item text-center" href="site/profile.html">个人主页</a>
+									<a class="dropdown-item text-center" th:href="@{|/user/profile/${loginUser.id}|}">个人主页</a>
 									<a class="dropdown-item text-center" th:href="@{/user/setting}">账号设置</a>
 									<a class="dropdown-item text-center" th:href="@{/logout}">退出登录</a>
 									<div class="dropdown-divider"></div>
@@ -125,7 +125,7 @@
 					这里的 map:${discussPosts} 来自HomeController.getIndexPage()的返回值List<Map<String, Object>> discussPosts，
 					其中map只是用来指代得到的Map的变量名，没有实际意义，可以叫其他名字-->
 					<li class="media pb-3 pt-3 mb-3 border-bottom" th:each="map:${discussPosts}">
-						<a href="site/profile.html">
+						<a th:href="@{|/user/profile/${map.user.id}|}">
 							<!--这里的调用：map.get("user") -> User -> user.getHeaderUrl()
 							'.'其实都调用了get方法-->
 							<img th:src="${map.user.headerUrl}" class="mr-4 rounded-circle" alt="用户头像" style="width:50px;height:50px;">
