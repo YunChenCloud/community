@@ -28,4 +28,8 @@ public interface DiscussPostMapper {
 
     int updateCommentCount(int id, int commentCount);
 
+    int updateStatus(int id, int status);
+
+    int updateScore(int id, double score);
+
 }

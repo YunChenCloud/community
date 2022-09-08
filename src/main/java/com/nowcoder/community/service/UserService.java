@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Thread.sleep;
+
 @Service
 public class UserService implements CommunityConstant {
 
@@ -171,7 +173,7 @@ public class UserService implements CommunityConstant {
         loginTicket.setUserId(user.getId());
         loginTicket.setTicket(CommunityUtil.generateUUID());
         loginTicket.setStatus(0);
-        loginTicket.setExpired(new Date(System.currentTimeMillis() + expireSeconds * 1000));
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + expireSeconds * 1000L)); //转换为long类型，以免超范围
         // loginTicketMapper.insertLoginTicket(loginTicket);
 
         String redisKey = RedisKeyUtil.getTicketKey(loginTicket.getTicket());
@@ -196,10 +198,11 @@ public class UserService implements CommunityConstant {
         return (LoginTicket) redisTemplate.opsForValue().get(redisKey);
     }
 
-    public int updateHeader(int userId, String headerUrl) {
+    public int updateHeader(int userId, String headerUrl) throws InterruptedException {
         //先更新数据库再删除缓存
         // return userMapper.updateHeader(userId, headerUrl);
         int rows = userMapper.updateHeader(userId, headerUrl);
+        sleep(5000);
         clearCache(userId);
         return rows;
     }

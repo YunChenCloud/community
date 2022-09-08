@@ -12,6 +12,7 @@ public class HostHolder {
 
     private ThreadLocal<User> users = new ThreadLocal<>();
 
+    //将当前线程作为key，user作为值存放
     public void setUser(User user) {
         users.set(user);
     }

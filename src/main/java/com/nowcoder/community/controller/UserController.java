@@ -97,7 +97,11 @@ public class UserController implements CommunityConstant{
         // http://localhost:8080/community/user/header/xxx.png (community之后的路径是自定义的)
         User user = hostHolder.getUser();
         String headerUrl = domain + contextPath + "/user/header/" + filename;
-        userService.updateHeader(user.getId(), headerUrl);
+        try {
+            userService.updateHeader(user.getId(), headerUrl);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return "redirect:/index";
     }
